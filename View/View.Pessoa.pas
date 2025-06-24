@@ -61,71 +61,13 @@ implementation
 procedure TPessoaView.btnCarregarClick(Sender: TObject);
 var
   LPessoaPresenter: TPessoaPresenter;
-  arq: string;
-  sl: TStringList;
-  linha: string;
-  arr: TArray<string>;
-  i: Integer;
 begin
-
   LPessoaPresenter := TPessoaPresenter.Create(Self);
   try
     LPessoaPresenter.CarregarListagem;
   finally
     FreeAndNil(LPessoaPresenter);
   end;
-
-//  if RadioButtonCSV.Checked then
-//  begin
-//    UniConnection1.ProviderName := 'SQLite';
-//    UniConnection1.Database := ExtractFilePath(ParamStr(0)) + 'dados.csv';
-//
-//
-//
-//    arq := ExtractFilePath(Application.ExeName) + 'dados.csv';
-//
-//    if not FileExists(arq) then
-//    begin
-//      ShowMessage('Arquivo CSV não encontrado.');
-//      Exit;
-//    end;
-//
-//    ClientDataSet1.EmptyDataSet;
-    sl := TStringList.Create;
-//    try
-//      sl.LoadFromFile(arq);
-//      for i := 0 to sl.Count - 1 do
-//      begin
-//        linha := sl[i];
-        arr := linha.Split([';']);
-//        if Length(arr) = 4 then
-//        begin
-//          ClientDataSet1.Append;
-//          ClientDataSet1.FieldByName('id').AsInteger := StrToIntDef(arr[0], 0);
-//          ClientDataSet1.FieldByName('nome').AsString := arr[1];
-//          ClientDataSet1.FieldByName('endereco').AsString := arr[2];
-//          ClientDataSet1.FieldByName('telefone').AsString := arr[3];
-//          ClientDataSet1.Post;
-//        end;
-//      end;
-//    finally
-//      sl.Free;
-//    end;
-//
-//    DataSource1.DataSet := ClientDataSet1;
-//  end
-//  else if RadioButtonSQLite.Checked then
-//  begin
-//    UniConnection1.ProviderName := 'SQLite';
-//    UniConnection1.Database := ExtractFilePath(ParamStr(0)) + 'dados.sqlite';
-//    UniQuery1.Close;
-//    UniQuery1.SQL.Text := 'SELECT p.id, p.nome, e.endereco, t.telefone ' +
-//                          'FROM pessoas p ' +
-//                          'LEFT JOIN enderecos e ON e.id_pessoa = p.id ' +
-//                          'LEFT JOIN telefones t ON t.id_pessoa = p.id';
-//    UniQuery1.Open;
-//    DataSource1.Dataset := UniQuery1;
-//  end;
 end;
 
 procedure TPessoaView.btnLimparClick(Sender: TObject);

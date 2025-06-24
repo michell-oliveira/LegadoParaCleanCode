@@ -65,7 +65,6 @@ begin
     finally
       FreeAndNil(LObjectManager);
     end;
-
   finally
     FConnection.Disconnect;
   end;
