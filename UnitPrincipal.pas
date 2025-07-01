@@ -3,113 +3,131 @@
 interface
 
 uses
-  Vcl.Forms, Vcl.Controls, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Data.DB,
-  Vcl.ExtCtrls, UniProvider, SQLiteUniProvider, Data.DBXSQLite, Vcl.Dialogs,
-  Uni, MemDS, DBAccess, System.Classes, System.SysUtils, Datasnap.DBClient;
+  Vcl.Forms,
+  Vcl.Controls,
+  Vcl.StdCtrls,
+  Vcl.Grids,
+  Vcl.DBGrids,
+  Vcl.ExtCtrls,
+  Vcl.Dialogs,
+  Data.DB,
+  Data.DBXSQLite,
+  MemDS,
+  DBAccess,
+  System.Classes,
+  System.SysUtils,
+  Datasnap.DBClient;
+
+type tpOrigem = (tpCsv, tpSQLite);
 
 type
-  TForm1 = class(TForm)
-    DBGrid1: TDBGrid;
+  TfrmPessoaCadastro = class(TForm)
+    GridPessoaExibir: TDBGrid;
     Panel1: TPanel;
     RadioButtonCSV: TRadioButton;
     RadioButtonSQLite: TRadioButton;
-    Button2: TButton;
-    UniConnection1: TUniConnection;
-    UniQuery1: TUniQuery;
-    DataSource1: TDataSource;
-    ClientDataSet1: TClientDataSet;
-    Button3: TButton;
-    procedure Button2Click(Sender: TObject);
-    procedure Button3Click(Sender: TObject);
+    btnCarregar: TButton;
+    dsPessoaExibir: TDataSource;
+    FCdsDadosExibir: TClientDataSet;
+    btnLimpar: TButton;
+    procedure btnCarregarClick(Sender: TObject);
+    procedure btnLimparClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
+    FDiretorioDataBase: string;
+    procedure CriarEstruturaDataSet;
+    procedure LimparDados;
+    procedure Exibir(AOrigem: tpOrigem);
+    procedure ExibirPessoaSQLite;
+    procedure ExibirPessoaCSV;
   public
   end;
 
 var
-  Form1: TForm1;
+  frmPessoaCadastro: TfrmPessoaCadastro;
 
 implementation
 
 {$R *.dfm}
+uses
+  uPessoaCSV,
+  uPessoaSQLite;
 
-procedure TForm1.Button2Click(Sender: TObject);
-var
-  arq: string;
-  sl: TStringList;
-  linha: string;
-  arr: TArray<string>;
-  i: Integer;
+procedure TfrmPessoaCadastro.btnCarregarClick(Sender: TObject);
 begin
   if RadioButtonCSV.Checked then
-  begin
-    UniConnection1.ProviderName := 'SQLite';
-    UniConnection1.Database := ExtractFilePath(ParamStr(0)) + 'dados.csv';
-
-    ClientDataSet1.Close;
-    ClientDataSet1.FieldDefs.Clear;
-    ClientDataSet1.FieldDefs.Add('id', ftInteger);
-    ClientDataSet1.FieldDefs.Add('nome', ftString, 100);
-    ClientDataSet1.FieldDefs.Add('endereco', ftString, 150);
-    ClientDataSet1.FieldDefs.Add('telefone', ftString, 20);
-    ClientDataSet1.CreateDataSet;
-
-    arq := ExtractFilePath(Application.ExeName) + 'dados.csv';
-
-    if not FileExists(arq) then
-    begin
-      ShowMessage('Arquivo CSV não encontrado.');
-      Exit;
-    end;
-
-    ClientDataSet1.EmptyDataSet;
-    sl := TStringList.Create;
-    try
-      sl.LoadFromFile(arq);
-      for i := 0 to sl.Count - 1 do
-      begin
-        linha := sl[i];
-        arr := linha.Split([';']);
-        if Length(arr) = 4 then
-        begin
-          ClientDataSet1.Append;
-          ClientDataSet1.FieldByName('id').AsInteger := StrToIntDef(arr[0], 0);
-          ClientDataSet1.FieldByName('nome').AsString := arr[1];
-          ClientDataSet1.FieldByName('endereco').AsString := arr[2];
-          ClientDataSet1.FieldByName('telefone').AsString := arr[3];
-          ClientDataSet1.Post;
-        end;
-      end;
-    finally
-      sl.Free;
-    end;
-
-    DataSource1.DataSet := ClientDataSet1;
-  end
-  else if RadioButtonSQLite.Checked then
-  begin
-    UniConnection1.ProviderName := 'SQLite';
-    UniConnection1.Database := ExtractFilePath(ParamStr(0)) + 'dados.sqlite';
-    UniQuery1.Close;
-    UniQuery1.SQL.Text := 'SELECT p.id, p.nome, e.endereco, t.telefone ' +
-                          'FROM pessoas p ' +
-                          'LEFT JOIN enderecos e ON e.id_pessoa = p.id ' +
-                          'LEFT JOIN telefones t ON t.id_pessoa = p.id';
-    UniQuery1.Open;
-    DataSource1.Dataset := UniQuery1;
-  end;
+    Exibir(tpCsv)
+  else
+  if RadioButtonSQLite.Checked then
+    Exibir(tpSQLite)
+  else
+    ShowMessage('Nenhuma fonte de dados selecionada!');
 end;
 
-procedure TForm1.Button3Click(Sender: TObject);
+procedure TfrmPessoaCadastro.btnLimparClick(Sender: TObject);
 begin
-  if DataSource1.DataSet <> nil then
-  begin
-    if DataSource1.DataSet = ClientDataSet1 then
-      ClientDataSet1.EmptyDataSet
-    else if DataSource1.DataSet = UniQuery1 then
-    begin
-      UniQuery1.Close;
-    end;
+  LimparDados;
+end;
+
+procedure TfrmPessoaCadastro.CriarEstruturaDataSet;
+begin
+  FCdsDadosExibir.close;
+  FCdsDadosExibir.FieldDefs.Clear;
+  FCdsDadosExibir.FieldDefs.Add('id', ftInteger);
+  FCdsDadosExibir.FieldDefs.Add('nome', ftString, 50);
+  FCdsDadosExibir.FieldDefs.Add('endereco', ftString, 80);
+  FCdsDadosExibir.FieldDefs.Add('telefone', ftString, 20);
+  FCdsDadosExibir.CreateDataSet;
+end;
+
+procedure TfrmPessoaCadastro.FormCreate(Sender: TObject);
+begin
+   FDiretorioDataBase := ExtractFilePath(Application.ExeName);
+   CriarEstruturaDataSet;
+   dsPessoaExibir.DataSet := FCdsDadosExibir;
+end;
+
+procedure TfrmPessoaCadastro.LimparDados;
+begin
+  if FCdsDadosExibir.RecordCount > 0 then
+    FCdsDadosExibir.EmptyDataSet;
+end;
+
+procedure TfrmPessoaCadastro.Exibir(AOrigem: tpOrigem);
+begin
+  LimparDados;
+  try
+    if AOrigem = tpCsv then
+      ExibirPessoaCSV
+    else
+      ExibirPessoaSQLite;
+
+  except on e:Exception do
+     ShowMessage(e.Message);
   end;
 end;
 
+procedure TfrmPessoaCadastro.ExibirPessoaCSV;
+var
+  LPessoaCSV: TPessoaCSV;
+begin
+  LPessoaCSV := TPessoaCSV.Create(FDiretorioDataBase);
+  try
+    LPessoaCSV.Exibir(FCdsDadosExibir);
+  finally
+   LPessoaCSV.free;
+  end;
+end;
+
+procedure TfrmPessoaCadastro.ExibirPessoaSQLite;
+var
+  LPessoaSQLite: TPessoaSQLite;
+begin
+  LPessoaSQLite := TPessoaSQLite.Create(FDiretorioDataBase);
+  try
+    LPessoaSQLite.Exibir(FCdsDadosExibir);
+  finally
+   LPessoaSQLite.free;
+  end;
+end;
 end.

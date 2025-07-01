@@ -1,4 +1,4 @@
-object Form1: TForm1
+object frmPessoaCadastro: TfrmPessoaCadastro
   Left = 0
   Top = 0
   Caption = 'Cadastro de Pessoas'
@@ -12,6 +12,7 @@ object Form1: TForm1
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -37,31 +38,31 @@ object Form1: TForm1
       Caption = 'SQLite'
       TabOrder = 1
     end
-    object Button2: TButton
+    object btnCarregar: TButton
       Left = 392
       Top = 12
       Width = 75
       Height = 25
       Caption = 'Carregar'
       TabOrder = 2
-      OnClick = Button2Click
+      OnClick = btnCarregarClick
     end
-    object Button3: TButton
+    object btnLimpar: TButton
       Left = 473
       Top = 12
       Width = 75
       Height = 25
       Caption = 'Limpar'
       TabOrder = 3
-      OnClick = Button3Click
+      OnClick = btnLimparClick
     end
   end
-  object DBGrid1: TDBGrid
+  object GridPessoaExibir: TDBGrid
     Left = 8
     Top = 64
     Width = 584
     Height = 322
-    DataSource = DataSource1
+    DataSource = dsPessoaExibir
     TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -69,24 +70,14 @@ object Form1: TForm1
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
   end
-  object UniConnection1: TUniConnection
-    Left = 320
-    Top = 112
+  object dsPessoaExibir: TDataSource
+    Left = 472
+    Top = 128
   end
-  object UniQuery1: TUniQuery
-    Connection = UniConnection1
-    Left = 432
-    Top = 168
-  end
-  object DataSource1: TDataSource
-    DataSet = UniQuery1
-    Left = 432
-    Top = 232
-  end
-  object ClientDataSet1: TClientDataSet
+  object FCdsDadosExibir: TClientDataSet
     Aggregates = <>
     Params = <>
-    Left = 432
-    Top = 112
+    Left = 368
+    Top = 152
   end
 end
