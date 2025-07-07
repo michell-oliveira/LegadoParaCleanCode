@@ -12,5 +12,42 @@
     <Transaction>2025/05/07 09:54:27.000.396,C:\Users\michell.oliveira\Documents\Treinamentos\CleanCode\NivelamentoSOLIDCC\Legado\uPrincipal.pas=</Transaction>
     <Transaction>2025/05/07 09:57:36.000.155,C:\Users\michell.oliveira\Documents\Treinamentos\CleanCode\CadastroPessoas_Legado_XE3_Compat\UnitPrincipal.pas=</Transaction>
     <Transaction>2025/05/07 09:59:55.000.826,=C:\Users\michell.oliveira\Documents\Treinamentos\CleanCode\NivelamentoSOLIDCC\Legado\UnitPrincipal.pas</Transaction>
-  </Transactions>
+    <Transaction>2025/07/04 08:03:22.000.237,=C:\Sistemas\LegadoParaCleanCode\Unit1.pas</Transaction>
+    <Transaction>2025/07/04 08:04:04.000.071,C:\Sistemas\LegadoParaCleanCode\DAO\DAO.Conexao.pas=C:\Sistemas\LegadoParaCleanCode\Unit1.pas</Transaction>
+    <Transaction>2025/07/04 08:12:40.000.685,C:\Sistemas\LegadoParaCleanCode\DAO\DAO.Pessoa.SQLite.pas=C:\Sistemas\LegadoParaCleanCode\DAO\DAO.Conexao.pas</Transaction>
+    <Transaction>2025/07/04 08:17:20.000.301,=C:\Sistemas\LegadoParaCleanCode\Unit1.pas</Transaction>
+    <Transaction>2025/07/04 08:17:36.000.228,C:\Sistemas\LegadoParaCleanCode\DAO\DAO.Pessoa.pas=C:\Sistemas\LegadoParaCleanCode\Unit1.pas</Transaction>
+    <Transaction>2025/07/04 08:24:34.000.456,=C:\Sistemas\LegadoParaCleanCode\Unit1.pas</Transaction>
+    <Transaction>2025/07/04 08:25:34.000.295,C:\Sistemas\LegadoParaCleanCode\Controller\Controller.Pessoa.pas=C:\Sistemas\LegadoParaCleanCode\Unit1.pas</Transaction>
+    <Transaction>2025/07/04 08:26:14.000.434,C:\Sistemas\LegadoParaCleanCode\Controller\Controller.SQLite=C:\Sistemas\LegadoParaCleanCode\Controller\Controller.Pessoa.SQLite</Transaction>
+    <Transaction>2025/07/04 08:37:08.000.016,C:\Sistemas\LegadoParaCleanCode\Controller\Controller.PessoaSQLite=C:\Sistemas\LegadoParaCleanCode\Controller\Controller.Pessoa.SQLite.PessoaSQLite</Transaction>
+    <Transaction>2025/07/04 08:37:08.000.045,C:\Sistemas\LegadoParaCleanCode\Controller\Controller.Pessoa.SQLite.pas=C:\Sistemas\LegadoParaCleanCode\Controller\Controller.pas</Transaction>
+    <Transaction>2025/07/04 08:37:58.838,=C:\Sistemas\LegadoParaCleanCode\Controller\Controller.Pessoa.SQLite.pas</Transaction>
+    <Transaction>2025/07/04 09:49:13.714,=C:\Sistemas\LegadoParaCleanCode\Unit1.pas</Transaction>
+    <Transaction>2025/07/04 09:49:31.711,C:\Sistemas\LegadoParaCleanCode\Model\Model.Pessoa.pas=C:\Sistemas\LegadoParaCleanCode\Unit1.pas</Transaction>
+    <Transaction>2025/07/04 10:05:18.793,C:\Sistemas\LegadoParaCleanCode\DAO\DAO.Pessoa.pas=</Transaction>
+    <Transaction>2025/07/04 10:09:24.024,C:\Sistemas\LegadoParaCleanCode\Controller\Controller.Pessoa.pas=C:\Sistemas\LegadoParaCleanCode\Controller\Controller.Pessoa.SQLite.pas</Transaction>
+    <Transaction>2025/07/04 10:24:45.757,C:\Sistemas\LegadoParaCleanCode\View\View.Pessoa.pas=C:\Sistemas\LegadoParaCleanCode\UnitPrincipal.pas</Transaction>
+    <Transaction>2025/07/04 10:24:45.757,C:\Sistemas\LegadoParaCleanCode\View\View.Pessoa.dfm=C:\Sistemas\LegadoParaCleanCode\UnitPrincipal.dfm</Transaction>
+    <Transaction>2025/07/04 18:51:31.630,=C:\Sistemas\LegadoParaCleanCode\Unit1.pas</Transaction>
+    <Transaction>2025/07/04 18:51:41.389,=C:\Sistemas\LegadoParaCleanCode\Unit1.pas</Transaction>
+    <Transaction>2025/07/04 18:52:06.862,C:\Sistemas\LegadoParaCleanCode\DAO\DAO.Pessoa.pas=C:\Sistemas\LegadoParaCleanCode\Unit1.pas</Transaction>
+    <Transaction>2025/07/04 18:54:30.719,C:\Sistemas\LegadoParaCleanCode\DAO\DAO.Pessoa.CSV=</Transaction>
+    <Transaction>2025/07/04 18:54:40.196,=C:\Sistemas\LegadoParaCleanCode\DAO\DAO.Pessoa.CSV.pas</Transaction>
+    <Transaction>2025/07/04 19:49:01.596,=C:\Sistemas\LegadoParaCleanCode\Unit1.pas</Transaction>
+    <Transaction>2025/07/04 19:49:36.235,C:\Sistemas\LegadoParaCleanCode\Tipos\Conexao.Tipo.pas=C:\Sistemas\LegadoParaCleanCode\Unit1.pas</Transaction>
+  </Transactions>  <ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="Controller"/>
+    <File Path="Controller\Controller.Pessoa.pas"/>
+    <File Path="DAO"/>
+    <File Path="DAO\DAO.Pessoa.SQLite.pas"/>
+    <File Path="DAO\DAO.Pessoa.CSV.pas"/>
+    <File Path="Model"/>
+    <File Path="Model\Model.Pessoa.pas"/>
+    <File Path="View"/>
+    <File Path="View\View.Pessoa.pas"/>
+    <File Path="View\View.Pessoa.dfm"/>
+    <File Path="Tipos"/>
+    <File Path="Tipos\Conexao.Tipo.pas"/>
+  </ProjectSortOrder>
 </BorlandProject>

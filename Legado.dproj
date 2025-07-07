@@ -82,9 +82,14 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="UnitPrincipal.pas">
-            <Form>Form1</Form>
+        <DCCReference Include="View\View.Pessoa.pas">
+            <Form>FrmPessoa</Form>
         </DCCReference>
+        <DCCReference Include="DAO\DAO.Pessoa.SQLite.pas"/>
+        <DCCReference Include="Controller\Controller.Pessoa.pas"/>
+        <DCCReference Include="Model\Model.Pessoa.pas"/>
+        <DCCReference Include="DAO\DAO.Pessoa.CSV.pas"/>
+        <DCCReference Include="Tipos\Conexao.Tipo.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
